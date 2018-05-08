@@ -1,0 +1,217 @@
+\documentclass[a4paper,twoside,12pt,fleqn]{article}
+\usepackage [reqno] {amsmath}
+\usepackage{amsfonts,amstext}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{german}
+\usepackage{graphicx}
+\usepackage{fullpage}
+
+\newcommand{\ZETTELNUMMER}{1}
+\newcommand{\ABGABEDATUM}{am 27. April 2018 bis 10 Uhr in die
+Tutorenf\"acher}
+
+\newcounter{AUFGNR}
+\setcounter{AUFGNR}{1}
+\newcommand{\AUFGABE}[2]{\vspace{0.3cm}\item[Aufgabe~\arabic{AUFGNR}]\stepcounter{AUFGNR} #1\hfill\emph{#2}}
+
+
+\newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil{#1}\right\rceil}
+\newcommand{\half}[1]{\frac{#1}{2}}
+
+\newcommand{\N}{\mathbb{N}}
+
+% \newtheorem*{ia}{IA}
+% \newtheorem*{ib}{IB}
+% \newtheorem*{ia}{IA}
+\newtheorem*{antwort}{Antwort}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\renewcommand{\labelenumii}{(\roman{enumii})}
+
+
+\begin{document}
+\pagestyle{empty}
+\hrule\medskip
+\rule{0ex}{0ex}\\[-1ex]
+\ZETTELNUMMER. Aufgabenblatt zur Vorlesung
+
+\smallskip
+\noindent
+\large
+\textbf{Grundlagen der theoretischen Informatik}\hfill SoSe 2018 \\[0.5ex]
+\normalsize
+Wolfgang Mulzer, Katharina Klost
+
+\medskip\hrule
+
+\smallskip
+\noindent
+\textbf{Abgabe} \ABGABEDATUM
+
+\vskip 0.5cm
+
+
+\begin{description}
+\AUFGABE{Vollst\"andige Induktion}{10 Punkte}
+
+In dieser Aufgabe sollen Sie das Prinzip der vollst\"andigen
+Induktion wiederholen.
+
+\begin{enumerate}
+  \item Sei $n \geq 2$.
+    Beweisen Sie durch vollst\"andige Induktion, dass eine Menge mit $n$
+    Elementen $n(n-1)/2$ Teilmengen mit genau zwei Elementen hat.
+
+    \begin{enumerate}
+      \item Induktionsbehauptung
+      \[
+        \forall n \in \N, n \geq 2 : \forall A, |A| = n, B = \{\{a_0, a_1\} |
+        a_0, a_1 \in A \}: |B| = n (n - 1) / 2
+      \]
+      \item Induktionsanfang mit $n = 2$\\
+      $A = \{x, y\}$ ($x, y$ beliebig)\\
+      Die einzige Teilmenge mit 2 Elementen von A ist A selbst: $B = \{A\}$\\
+      $|B| = 1$\\
+      Nach Behauptung: $|B| = n(n-1)/2 = 2 \cdot 2 / 2 = 1$
+      \item Induktionsschritt: $n \rightarrow n + 1$\\
+      $|A| = n \Leftrightarrow A = \{a_0, a_1, \dots, a_n\}$\\
+      Nach Induktionsbehauptung ist $|B| = n(n-1)/2$\\
+      Bekommt die Menge ein weiteres Element $a_{n+1}$, gibt es genau $n$
+      neue Teilmengen: $\{a_0, a_{n+1}\} \dots \{a_n, a_{n+1}\}$\\
+      Also: $A' = \{a_0, a_1, \dots, a_n, a_{n+1}\}$, $|A'| = n+1$\\
+      $|B'| = |B| + n = n(n-1)/2 + n$\\
+      Einsetzen Induktionsbehauptung:\\
+      $|B'| = (n+1)(n+1-1)/2 = n(n+1)/2$\\
+      Zu pr\"ufen: $n(n+1)/2 = n(n-1)/2 + n$
+      \begin{align*}
+        n(n+1)/2 &= n(n-1)/2 + n\\
+                 &= n((n-1)/2 + 1) &| :n \text{ (da $n \geq 2$)}\\
+        (n+1)/2  &= (n-1)/2 + 1    &| \cdot 2\\
+        n+2      &= n-1 + 2\\
+                 &= n + 1
+      \end{align*}
+    \end{enumerate}
+  \item Zeigen Sie durch vollst\"andige Induktion: F\"ur alle
+  $n \geq 1$ ist
+    \[
+      1\cdot 1! + 2 \cdot 2! + \dots + n \cdot n! = (n+1)! -1.
+    \]
+    \begin{enumerate}
+      \item Induktionsbehauptung
+      \[
+        \forall n \in \N, n \geq 1: 1 \cdot 1! + 2 \cdot 2! + \dots +
+        n \cdot n! = (n + 1)! - 1
+      \]
+      \item Induktionsanfang mit $n = 1$
+      \begin{align*}
+        1 \cdot 1! &= 1\\
+        (1+1)!-1 = 2-1 &= 1
+      \end{align*}
+      \item Induktionsschritt: $n \rightarrow n + 1$\\
+      Zu zeigen: $1\cdot 1! + 2 \cdot 2! + \dots + n \cdot n! \cdot (n+1)(n+1)!
+      = ((n+1)+1)!-1$\\
+      Einsetzen Induktionsbehauptung:\\
+      \begin{align*}
+        (n+1)!-1 + (n+1)(n+1)!   &= (n+2)!-1\\
+        (n+1)!   + (n+1)(n+1)!   &= (n+2)!\\
+        (n+1)! \cdot (1 + (n+1)) &= (n+2)!\\
+        (n+1)! \cdot (n+2)       &= (n+2)!\\
+        (n+2)!                   &= (n+2)!\\
+      \end{align*}
+    \end{enumerate}
+\end{enumerate}
+
+\AUFGABE{W\"orter}{10 Punkte}
+
+ F\"ur ein \emph{Alphabet} $\Sigma$ mit $k$ Elementen
+  ist  $\Sigma^*$ die Menge der W\"orter (Folgen), die
+  man aus den Buchstaben von $\Sigma$ bilden kann.
+\begin{enumerate}
+  \item Wieviele W\"orter in $\Sigma^*$ haben die
+    L\"ange $n$ (bestehen aus $n$ Buchstaben)?
+    \begin{antwort}
+      Es gibt $n$ Buchstaben pro Wort mit jeweils $k$ M\"oglichkeiten, daher gibt
+      es $k^n$ m\"ogliche W\"orter in $\Sigma^*$ mit L\"ange $n$.
+    \end{antwort}
+
+  \item Wieviele Palindrome in $\Sigma^*$ haben die L\"ange $n$?
+(Ein Palindrom ist ein Wort, das von vorne und von hinten gelesen
+gleich ist.)
+    \begin{antwort}
+      $k^{\ceil{\frac{n}{2}}}$
+    \end{antwort}
+  \item Wieviele W\"orter der L\"ange $n=2,3,4,5,6,7,8$ \"uber dem Alphabet
+  $\Sigma = \{\texttt{(},\texttt{)}\}$ sind ``g\"ultige''
+  Klammerausdr\"ucke wie zum Beispiel \texttt{(()(()(()))())} und
+  \texttt{((()))}? (Un\-g\"ul\-tig sind etwa
+  \texttt{(((())} --- mehr offene als geschlossene Klammern, und
+  \texttt{())(()} --- die zweite schlie\ss{}ende Klammer hat keine
+   \"offnende Partnerklammer.)
+   Finden Sie eine (Rekursions-)Formel f\"ur die Anzahl
+   der g\"ultigen Klammerausdr\"ucke der L\"ange $n$.
+\end{enumerate}
+
+\AUFGABE{Kleene-Stern}{10 Punkte}
+\begin{enumerate}
+  \item $(A \cup B)^* = A^* \cup B^*$;
+    \begin{antwort}
+      Falsch: Sei\\
+      $A = \{a,c\}$ und\\
+      $B = \{b,c\}$ so ist\\
+      $acac \in (A \cup B)^*$, jedoch\\
+      $acac \notin (A^* \cup B^*)$
+    \end{antwort}
+  \item $(A \cap B)^* = A^* \cap B^*$;
+    \begin{antwort}
+      Richtig: Sei\\
+      $A = \{a_0, \dots, a_i, c_0, \dots, c_k\}$ und\\
+      $B = \{b_0, \dots, b_j, c_0, \dots, c_k\}$, wobei\\
+      $a_{0-i} :=$ Elemente aus $A$, die nicht in $B$ sind,\\
+      $b_{0-j} :=$ Elemente aus $B$, die nicht in $A$ sind und\\
+      $c_{0-k} :=$ Elemente, die in $A$ und $B$ sind.\\
+      $A \cap B = \{c_0, \dots, c_k\}$\\
+      $(A \cap B)^* = \{\epsilon, c_0, \dots, c_k, c_0c_0, \dots, c_0c_k, \dots\}$\\
+      $A^* = \{\epsilon, a_0 \dots a_i, c_0 \dots c_k, a_0a_0 \dots
+        a_0c_k \dots c_kc_k \dots\}$\\
+      $B^* = \{\epsilon, b_0 \dots b_j, c_0 \dots c_k, b_0b_0 \dots
+        b_0c_k \dots c_kc_k \dots\}$\\
+      $A^* \cap B^* = \{\epsilon, c_0, \dots, c_k, c_0c_0, \dots, c_0c_k, \dots\}$\\
+      $\Rightarrow (A \cap B)^* = A^* \cap B^*$
+    \end{antwort}
+  \item $(A  \circ B)^* = A^* \circ B^*$;
+    \begin{antwort}
+      Falsch: Sei\\
+      $A = \{a\}$ und\\
+      $B = \{b\}$ so ist\\
+      $abab \in (A \circ B)^*$, jedoch\\
+      $abab \notin (A^* \circ B^*)$
+    \end{antwort}
+  \item $(A^*)^* = A^*$;
+    \begin{antwort}
+      Richtig:\\
+      \begin{align*}
+        A^* &= \bigcup^n_{k=0} A^k = A^0 \cup \dots \cup A^n\\
+        (A^*)^* &= \{\epsilon\} \cup (A^0\cup\dots\cup A^n) \cup
+          (A^0\cup\dots\cup A^n)^2 \cup \dots \cup (A^0\cup\dots\cup A^n)^m\\
+          &= \{\epsilon\} \cup A^0 \cup \dots \cup A^n
+      \end{align*}
+    \end{antwort}
+  \item $A \subseteq B \Rightarrow A^* \subseteq B^*$.
+    \begin{antwort}
+      Richtig. Sei\\
+      $A = \{a_0, \dots, a_i\}$\\
+      $B = \{a_0, \dots, a_i, b_0, \dots, b_j\}$\\
+      $a_{0-i}$ := Elemente aus $A$ und $B$\\
+      $b_{0-j}$ := Elemente aus $B$, die nicht in $A$ sind\\
+      $\Rightarrow A \subseteq B$\\
+      $A^* = \{\epsilon, a_0 \dots a_i, a_0a_0 \dots a_ia_i \dots\}$\\
+      $B^* = \{\epsilon, a_0 \dots a_i, b_0 \dots b_j,
+        a_0a_0 \dots a_ia_i \dots a_ib_0 \dots a_ib_j
+        \dots b_0a_0 \dots\}$\\
+      $\Rightarrow A^* \subseteq B^*$
+    \end{antwort}
+\end{enumerate}
+\end{description}
+\end{document}

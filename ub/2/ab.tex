@@ -1,0 +1,274 @@
+\documentclass[a4paper,twoside,12pt,fleqn]{article}
+\usepackage [reqno] {amsmath}
+\usepackage{amsfonts,amstext}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{german}
+\usepackage{graphicx}
+\usepackage{fullpage}
+
+\newcommand{\ZETTELNUMMER}{2}
+\newcommand{\ABGABEDATUM}{am 4. Mai 2018 bis 10 Uhr in die
+Tutorenf\"acher}
+
+\newcounter{AUFGNR}
+\setcounter{AUFGNR}{1}
+\newcommand{\AUFGABE}[2]{\vspace{0.3cm}\item[Aufgabe~\arabic{AUFGNR}]\stepcounter{AUFGNR} #1\hfill\emph{#2}}
+
+
+\newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil{#1}\right\rceil}
+\newcommand{\half}[1]{\frac{#1}{2}}
+
+\newcommand{\N}{\mathbb{N}}
+\newtheorem*{antwort}{Antwort}
+
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\renewcommand{\labelenumii}{(\roman{enumii})}
+
+
+\begin{document}
+\pagestyle{empty}
+
+\noindent
+\large
+\textbf{Grundlagen der theoretischen Informatik}\hfill SoSe 2018 \\[0.5ex]
+\normalsize
+Anton Oehler, Jona Rex
+
+\medskip\hrule
+
+\smallskip
+\noindent
+\textbf{Abgabe} \ABGABEDATUM
+
+
+
+\begin{description}
+	\AUFGABE{Regul\"are Ausdr\"ucke I}{10 Punkte}
+
+	\begin{enumerate}
+		\item
+		      Geben Sie regul\"are Ausdr\"ucke f\"ur die folgenden Sprachen an.
+		      Erkl\"aren Sie Ihren Ausdruck in einem Satz, und geben Sie das zu
+		      Grunde liegende Alphabet an. Erkl\"aren Sie ggf.\@ auch alle
+		      Annahmen, die Sie gemacht haben.
+		      \begin{enumerate}
+			      \item Summen von positiven dezimalen Festkommazahlen.
+			            In der Sprache sollen also z.B.\@ die Zeichenketten
+                  $3.14$ oder auch $3+4.2+7+1$ vorkommen.
+                  \begin{align*}
+                    \Sigma &= \{0, \dots, 9, `.`, +\}\\
+                    \text{Sei } d &= \{0,1,2,3,4,5,6,7,8,9\}\\
+                    \text{und } f &= d \cup dd\\
+                    R &= d^+\{`.` \circ f, \epsilon\} \> (+ \circ d^+\{`.` \circ f, \epsilon\})^*
+                  \end{align*}
+                  Eine Summe von positiven dez. Festkommazahlen besteht aus einer ersten Zahl
+                  und optional einer beliebig langen Folge von `+` und weiteren Zahlen.
+                  Jede Zahl setzt sich aus mindestens einer Ziffer zusammen, optional gefolgt
+                  von einem Punkt (hier der Sichtbarkeit halber $`.`$) und einer oder zwei
+                  weiteren Ziffern.\\
+                  \textbf{Annahme:} Festkommazahlen beschr"anken sich auf 2 Nachkommastellen, sonst ist
+                  $f = d^+$ und auch der Teil vor dem Komma darf mit $0$ beginnen.
+			      \item KFZ-Nummernschilder, bestehend aus ein bis drei Gro\ss{}buchstaben
+			            gefolgt von einem Bindestrich, dann ein bis
+			            zwei Gro\ss{}buchstaben und zum Schluss ein bis vier Ziffern.
+			            Die L\"ange der Nummernschilder insgesamt betr\"agt nicht mehr als
+                  acht Zeichen.
+                  \begin{align*}
+                    \Sigma &= \{A, \dots, Z, 0, \dots, 9, -\}\\
+                    \text{Sei } a &= \{A, \dots, Z\}\\
+                    \text{und } d &= \{0, \dots, 9\}\\
+                    R = \> &(a-(a \cup aa)(d \cup dd \cup ddd \cup dddd)) \cup\\
+                           &(aa-a(a \cup d \cup \epsilon)(d \cup dd \cup ddd)) \cup\\
+                           &(aaa-a(a \cup d \cup \epsilon)(d \cup dd)
+                  \end{align*}
+                  Wir betrachten 3 F"alle: (hier: Buchstabe = Gro"sbuchstabe)
+                  \begin{itemize}
+                    \item 1 Buchstabe am Anfang, gefolgt von einem Bindestrich und
+                    1-2 Buchstaben und 1-4 Zahlen
+                    \item 2 Buchstaben am Anfang, gefolgt von einem Bindestrich und einem
+                    Buchstaben. Dann folgt [entweder ein Buchstabe, eine Zahl oder nichts]
+                    und danach 1-3 Zahlen
+                    \item 3 Buchstaben am Anfang, ein Bindestrich, gefolgt von einem Buchstaben,
+                    gefolgt von [entweder einem Buchstaben, einer Zahl oder nichts] und
+                    anschlie"send 1-2 Zahlen
+                  \end{itemize}
+                  \textbf{Annahme:} Der Bindestrich z"ahlt auch als Zeichen, nicht nur Buchstaben
+                  und Zahlen.
+			      \item Die Menge aller Bin\"arzahlen, die durch vier teilbar sind.
+                  Dabei sind keine \"uberfl\"ussigen f\"uhrenden Nullen erlaubt.
+                  \begin{align*}
+                    R &= 0 \cup (1(0 \cup 1)^* \cup \epsilon)100
+                  \end{align*}
+                  Entweder $0$, $100$ ($\epsilon \circ 100$) oder eine Zahl die mit $1$ beginnt,
+                  gefolgt von beliebigen Kombinationen von $0$ und $1$, gefolgt von $100$.
+		      \end{enumerate}
+		\item
+		      Beschreiben Sie in deutscher Sprache die durch die folgenden regul\"aren
+		      Ausdr\"ucke charakterisierten Mengen.
+		      Ihre Beschreibungen sollen die Form haben:
+		      \begin{center}
+			      \emph{Die Menge aller W\"orter \"uber dem
+				      Alphabet $\{0,1\}$ \dots .``}  %''
+		      \end{center}
+		      Dabei soll \dots durch maximal acht W\"orter ersetzt werden.
+
+		      \begin{enumerate}
+            \item $0^*(0^* 1 0^* 1 0^*)^*$
+            Beliebige Folge mit gerader Anzahl an Einsen
+			      \item $(00 \cup 11 \cup (01 \cup 10) (00 \cup 11)^* (01 \cup 10))^*$.
+		      \end{enumerate}
+	\end{enumerate}
+
+	\AUFGABE{Regul\"are Ausdr\"ucke II}{10 Punkte}
+
+	Zwei regul\"are Ausdr\"ucke $\alpha, \beta$ hei\ss{}en \emph{\"aquivalent},
+	geschrieben $\alpha \sim \beta$, genau dann, wenn sie die gleiche
+	Sprache repr\"asentieren, also $L(\alpha)=L(\beta)$ ist.
+	\renewcommand{\a}{\alpha}
+	\renewcommand{\b}{\beta}
+	\newcommand{\e}{\epsilon}
+	Zeigen Sie:
+	\begin{enumerate}
+		\item $(\alpha \cup \beta)\gamma \sim \alpha\gamma \cup \beta\gamma$\\
+		Zu zeigen:
+		\begin{align*}
+			L((\alpha\cup\beta)\gamma) &= L(\alpha\gamma\cup\beta\gamma)\\
+			L(\alpha\cup\beta)\circ L(\gamma) &= L(\alpha\gamma)\cup L(\beta\gamma)\\
+			\{\alpha, \beta\}\circ\{\gamma\} &= \{\alpha\circ\gamma\}\cup\{\beta\circ\gamma\}\\
+			\{\alpha\circ\gamma, \beta\circ\gamma\} &= \{\alpha\circ\gamma, \beta\circ\gamma\} &\Box
+		\end{align*}
+		\item $(\alpha^*)^* \sim \alpha^*$\\
+		Zu zeigen:
+		\begin{align*}
+			L((\alpha^*)^*) &= L(\alpha^*)\\
+			L(\a^*) &= \{\epsilon,\a,\a\a,\a\a\a,\dots\}
+		\end{align*}
+		Konkateniert man nun f"ur $L((\a^*)^*)$ alle W"orter aus
+		$\{\epsilon,\a,\a\a,\a\a\a,\dots\}$ so kann dadurch nur wieder
+		$\{\epsilon,\a,\a\a,\a\a\a,\dots\}$ entstehen:
+		\begin{align*}
+			\e\circ\e &= \e\\
+			\e\circ\a &= \a\\
+			\e\circ\a\a &= \a\a\\
+			\dots\\
+			\a\circ\e &= \a\\
+			\a\circ\a &= \a\a\\
+			\dots
+		\end{align*}
+		Also ist $L(\a^*)^2 = L(\a^*)$ und nach gleichem Schema auch\\
+		\[ \forall k\in\N, k>0: L(\a^*)^k = L(\a^*) \]
+		und f"ur $k = 0: L(\a^*)^k = L(\a^*)^0 = \{\e\}$. Daraus folgt:\\
+		\begin{align*}
+			L(\a^*)^* &= \bigcup_{k=0}^\infty L(\a^*)^k\\
+			&= L(\a^*)^0 \>\cup \bigcup_{k=1}^\infty L(\a^*)^k\\
+			&= \{\e\} \>\cup \bigcup_{k=1}^\infty L(\a^*)^k\\
+			&= \{\e\} \>\cup \bigcup_{k=1}^\infty L(\a^*)\\
+			&= \{\e\} \>\cup L(\a^*)\\
+			&= L(\a^*) &\Box
+		\end{align*}
+		\item $(\alpha \cup \beta)^* \sim (\alpha^*\beta^*)^*$;
+		\item $\alpha\emptyset \sim \emptyset$\\
+			Zu zeigen:
+			\begin{align*}
+				L(\a\emptyset) &= L(\emptyset)\\
+				\{w \circ v | w \in \{ \a \} \wedge v \in \emptyset\} &= \emptyset\\
+				\emptyset &= \emptyset &\Box
+			\end{align*}
+		\item $\alpha\emptyset^* \sim \alpha$\\
+			Zu zeigen:
+			\begin{align*}
+				L(\a\emptyset^*) &= L(\a)\\
+				L(\a)\circ L(\emptyset^*) &= L(\a)
+			\end{align*}
+			Per Definition ist $\emptyset\circ\emptyset=\emptyset$ und
+			$\emptyset\cup\emptyset=\emptyset$. Somit ist
+			\begin{align*}
+				\emptyset^* &= \emptyset^0 \cup \emptyset^1 \cup \emptyset^2 \dots\\
+				&= \emptyset^0 \cup \emptyset \cup \emptyset \dots\\
+				&= \{\e\}
+			\end{align*}
+			Also ist
+			\begin{align*}
+				L(\a) \circ L(\emptyset\} = L(\a) \circ \{\e\} = L(\a) &&\Box
+			\end{align*}
+	\end{enumerate}
+	\newpage
+
+	\AUFGABE{Regul\"are Sprachen}{10 Punkte}
+
+	Eine Sprache hei\ss{}t \emph{regul\"ar}, falls sie sich durch einen
+	regul\"aren Ausdruck darstellen l\"asst.
+
+	\begin{enumerate}
+	\item Zeigen Sie: Jede endliche Sprache ist regul\"ar.\\
+	\textbf{Antwort: }\\
+	Eine endliche Sprache besteht nur aus endlich vielen W"ortern.
+	Eine (primitive) Darstellung dieser Sprache ist, alle m"oglichen
+	W"orter miteinander zu vereinigen.
+	\item
+	Sei $\Sigma$ ein Alphabet und $w = \sigma_1\sigma_2\dots\sigma_n$
+	ein Wort \"uber $\Sigma$. Die \emph{Umkehrung} von $w$, $w^R$, ist
+	definiert als $w^R = \sigma_{n}\sigma_{n-1}\dots\sigma_1$.
+	So ist zum Beispiel $\text{haus}^{R}=\text{suah}$,
+	$\text{blatt}^{R}=\text{ttalb}$,
+	$\text{a}^{R}=\text{a}$ und
+	$\varepsilon^{R}=\varepsilon$.
+	Die Umkehrung einer Sprache $L \subseteq \Sigma^*$
+	ist definiert als
+	$L^R = \{w^R \mid w \in L\}$.
+
+	Zeigen Sie: Ist $L$ eine regul\"are Sprache, so ist auch
+	$L^R$ regul\"ar. Geben Sie dazu einen detaillierten Beweis,
+	der strukturelle Induktion \"uber den regul\"aren Ausdruck
+	f\"ur $L$ verwendet.\\
+	\textbf{Antwort: }\\
+	Sei $w$ ist Wort "uber $\Sigma$ mit $w = o_1o_2\dots o_n$ und\\
+	$w^R$ seine Umkehrung mit $o_no_{n-1}\dots o_1$.\\
+	Sei die Umkehrung einer Sprache $L \subseteq \Sigma^*$ definiert als
+	$L^R = \{w^R | w \in L\}$.\\
+	% Im folgenden bedeuted $L_n \Leftrightarrow |L| = n$
+	\begin{enumerate}
+		% \item[Voraussetzung:] $L_n$ ist regul"ar $\Rightarrow L_n^R$ ist regul"ar
+		\item[Voraussetzung:] $L$ ist regul"ar $\Rightarrow L^R$ ist regul"ar
+		\item[Anfang:]
+			mit $L = \emptyset$:\\
+			Aus der Definition von $L^R = \{w^R | w \in L\}$ folgt:
+			\[ L = \emptyset \> \Leftrightarrow L^R = \emptyset \]
+			mit $L = \{\epsilon\}$:\\
+			Per Definition ist $\epsilon^R = \epsilon$. Also gilt:
+			\[ L = \{\epsilon\} \> \Leftrightarrow L^R = \{\epsilon\} \]
+		\item[Schritt:] Laut \emph{IV.} gilt:\\
+			Wenn $L$ regul"ar, dann ist auch $L^R$ regul"ar.\\
+			Sei nun $w = o_1o_2\dots o_n$ ein beliebiges
+			Wort der L"ange $n$ in $L$ und\\
+			$w^R = o_no_{n-1}\dots o_1$
+			seine Umkehrung in $L^R$.
+
+			Zu zeigen: f"ur $a \in \Sigma$ gilt:
+			\begin{itemize}
+				\item $(w \circ a) \in L'$,($L'$ reg.) $\Rightarrow
+					(w\circ a)^R \in L'^R$,($L'^R$ reg.)
+					\begin{align*}
+						&(w\circ a) = o_1o_2\dots o_na\\
+						\Rightarrow &(w\circ a)^R = ao_no_{n-1}\dots o_2o_1\\
+						\Rightarrow &L'^R \text{ ist regul"ar}
+					\end{align*}
+				\item $(w\cup a) \in L'$,($L'$ reg.) $\Rightarrow
+					(w\cup a)^R \in L'^R$,($L'^R$ reg.)
+					\begin{align*}
+						&(w\cup a) = \{w, a\}\\
+						\Rightarrow &(w\cup a)^R = \{w^R, a^R\}\\
+						\Rightarrow &(w\cup a)^R = \{w^R, a\}
+					\end{align*}
+					Dass $w^R \in L'^R$ l"asst sich wie zuvor zeigen, und da
+					$a^R = a$ (Definition), ist $(w\cup a)^R \in L'^R$ und
+					$L'^R$ regul"ar.
+			\end{itemize}
+	\end{enumerate}
+	\end{enumerate}
+
+\end{description}
+\end{document}
