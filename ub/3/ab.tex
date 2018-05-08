@@ -165,7 +165,6 @@ Anton Oehler, Jona Rex
 			\draw (bc)  edge             node {0} (abc);
 			\draw (ac)  edge             node {0} (abc);
 			\draw (abc) edge[loop below] node {0} (abc);
-
 			\draw (e)   edge[bend right=45,above] node {0} (a);
 			\draw (a)   edge               node {1} (e);
 			\draw (b)   edge               node {1} (e);
@@ -189,7 +188,25 @@ Anton Oehler, Jona Rex
 		\end{tikzpicture}
 		\caption{Zustandsdiagramm von $M$ (DEA, vereinfacht)}
 	\end{figure}
+
 	% AUFGABE 3
 	\AUFGABE{NEAs mit mehreren Startzust"anden}{10 Punkte}
+	\begin{enumerate}
+		\item NEAs mit mehreren Startzust"anden sind wie NEAs mit einem
+		Startzustand, nur wird statt einem Startzustand $q_0$ eine
+		Menge von Startzust"anden $Q_0$ verwendet. Jeder NEA mit
+		einem Startzustand wird dann mit $Q_0 = \{q_0\}$ dargestellt.
+		\item Jeder NEA mit mehreren Startzust"anden l"asst sich als
+		NEA mit einem Startzustand darstellen, indem analog zur
+		Konstruktion von DEAs aus NEAs die Potenzmengenkonstruktion
+		verwendet wird. Zu jeder Untermenge der Menge aller Zust"ande
+		wird ein Zustand angelegt, die "Uberg"ange werden analog zur
+		Potenzmengenkonstruktion von NEA zu DEA gew"ahlt.
+		Nun gibt es einen Zustand $\{q_0, q_1, q_2, \dots\}, q_i \in Q_0$,
+		der alle Startzust"ande des Urspungs-NEA enth"alt. Dieser wird
+		zum Startzustand des ``Potenzmengen-NEAs``. Der Beweis, dass
+		die Potenzmengenkonstruktion die selbe Sprache repr"asentiert,
+		ist von der Potenzmengenkonstruktion von NEA zu DEA zu entnehmen.
+	\end{enumerate}
 \end{description}
 \end{document}
